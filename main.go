@@ -9,7 +9,6 @@ import (
 
 func main() {
 
-	fmt.Print("hi")
 	service := "localhost:1200"
 	udpAddr, err := net.ResolveUDPAddr("udp4", service)
 	checkError(err)
