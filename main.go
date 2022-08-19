@@ -1,21 +1,22 @@
 package main
 
 import (
-    "net"
-    "os"
-    "fmt"
-		"time"
+	"fmt"
+	"net"
+	"os"
+	"time"
 )
 
 func main() {
 
+	fmt.Print("hi")
 	service := "localhost:1200"
 	udpAddr, err := net.ResolveUDPAddr("udp4", service)
 	checkError(err)
 
 	conn, err := net.ListenUDP("udp", udpAddr)
 	checkError(err)
-	
+
 	for {
 		handleClient(conn)
 	}
@@ -27,7 +28,7 @@ func handleClient(conn *net.UDPConn) {
 
 	_, addr, err := conn.ReadFromUDP(buf[0:])
 	if err != nil {
-			return
+		return
 	}
 
 	daytime := time.Now().String()
@@ -37,7 +38,7 @@ func handleClient(conn *net.UDPConn) {
 
 func checkError(err error) {
 	if err != nil {
-			fmt.Printf("Fatal error: %s", err.Error())
-			os.Exit(1)
+		fmt.Printf("Fatal error: %s", err.Error())
+		os.Exit(1)
 	}
 }
